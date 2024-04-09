@@ -1,0 +1,1 @@
+from .storedata import store,get

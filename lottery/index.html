@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>刮刮乐</title>
+</head>
+<body>
+<div class="page">
+    <div class="unrealC">
+        <div class="head">奖</div>
+        <div class="scratch-container">
+            <div class="unrealH"></div>
+            <!--            <canvas class="scratch-area"></canvas>-->
+        </div>
+    </div>
+    <div class="container show" style="top:40%;left: 35%">
+        <div class="head">奖</div>
+        <div class="scratch-container" id="main">
+            <div class="hidden-content">test</div>
+            <canvas class="scratch-area" id="canvas"></canvas>
+        </div>
+    </div>
+</div>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .img1{
+        background-image: url("https://photofortypora.oss-cn-beijing.aliyuncs.com/Dong.jpg"), linear-gradient(to right bottom, rgba(213, 97, 119, 0.5), rgba(211, 17, 52, 0.5));
+
+    }
+    .img2{
+        background-image: url("https://photofortypora.oss-cn-beijing.aliyuncs.com/image-20240409222938423.png"), linear-gradient(to right bottom, rgba(213, 97, 119, 0.5), rgba(211, 17, 52, 0.5));
+
+    }
+    .img3{
+        background-image: url("https://photofortypora.oss-cn-beijing.aliyuncs.com/image-20240409223014321.png"), linear-gradient(to right bottom, rgba(213, 97, 119, 0.5), rgba(211, 17, 52, 0.5));
+
+    }
+    .img4{
+        background-image: url("https://photofortypora.oss-cn-beijing.aliyuncs.com/image-20240409223047990.png"), linear-gradient(to right bottom, rgba(213, 97, 119, 0.5), rgba(211, 17, 52, 0.5));
+
+    }
+    .img5{
+        background-image: url("https://photofortypora.oss-cn-beijing.aliyuncs.com/image-20240410012206065.png"), linear-gradient(to right bottom, rgba(213, 97, 119, 0.5), rgba(211, 17, 52, 0.5));
+
+    }
+
+
+    .page {
+        height: 100vh;
+        position: relative;
+        background-size: cover;
+        background-image: url("https://photofortypora.oss-cn-beijing.aliyuncs.com/HB.png");
+    }
+
+    .unrealC:hover {
+        box-shadow: 0.1rem 0.4rem 0.5rem rgba(0, 0, 0, 0.5);
+        outline: .1rem solid greenyellow;
+        outline-offset: .5rem;
+        z-index: 11;
+        transform: translatex(80px);
+        /*background: radial-gradient(circle at 50px 101px, transparent 20px, #00adb5 0) 100% no-repeat;*/
+    }
+    .moveleft{
+        transform: translateX(200px);
+        opacity: 0;
+    }
+    .head{
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 600;
+        padding-top: 25px;
+    }
+    .unrealC {
+        box-shadow: 0 0.5rem 4rem rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        transition: all 1s ease;
+        background: radial-gradient(circle at 50px 150px, transparent 20px, #c47620 0) 100% no-repeat;
+        position: absolute;
+        display: none;
+        width: 30%;
+        z-index: 10;
+        top:0;
+        .head {
+            width: 30%;
+            height: 100%;
+        }
+
+        .scratch-container {
+            height: 150px;
+            position: relative;
+            background: #6b7280;
+            padding-top: 3rem;
+            text-align: center;
+            width: 70%;
+
+            .hidden-content {
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding-top: 50px;
+                height: 100%;
+                position: absolute;
+                user-select: none;
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: 300;
+            }
+
+            .scratch-area {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+
+            }
+
+            .unrealH {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                user-select: none;
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: 300;
+                background: #c0c0c0;
+            }
+
+
+        }
+
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateX(-10px) translateY(-10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+        }
+    }
+    .container {
+        border-radius: 3px;
+        background: radial-gradient(circle at 50px 150px, transparent 20px, #c47620 0) 100% no-repeat;
+        position: absolute;
+        animation: fadeIn 0.8s ease-in-out;
+        display: flex;
+        width: 30%;
+        z-index: 10;
+
+        .head {
+            width: 30%;
+            height: 100%;
+        }
+
+        .scratch-container {
+            height: 150px;
+            position: relative;
+            background: #6b7280;
+            padding-top: 3rem;
+            text-align: center;
+            width: 70%;
+
+            .hidden-content {
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding-top: 50px;
+                height: 100%;
+                position: absolute;
+                user-select: none;
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #4a9fee;
+                background-blend-mode: darken;
+                background-position: center;
+                background-size: cover;
+            }
+
+            .scratch-area {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+
+            }
+
+
+
+
+        }
+
+    }
+
+</style>
+<script>
+    const strs=['指定人表演','指定人表演','任意奖励','笔记本','笔记本','零食','零食','零食','零食']
+    const imgs=['img1','img2','img1','img3','img4','img5','img5','img4','img3']
+    let canvas
+    let container
+    let hidden
+    let ctx
+    // 获取要复制的节点
+    const originalNode = document.querySelector('.unrealC');
+    const load=()=>strs.forEach((e,index)=>{
+        const clonedNode = originalNode.cloneNode(true);
+
+        clonedNode.style.top=String((index+1)*40)+'px'
+        clonedNode.style.display='flex'
+        clonedNode.addEventListener('click',function(){
+            loadC()
+            clonedNode.classList.add('moveleft');
+            let x=getReward()
+            hidden.textContent=x[0]
+            imgs.forEach(img=>{
+                hidden.classList.remove(img)
+
+            })
+            hidden.classList.add(imgs[x[1]])
+            console.log(imgs[x[1]])
+
+        })
+        document.querySelector(".page").append(clonedNode);
+    })
+    load();
+
+    function loadC(){
+        if(container){
+            const clonedNode = container.cloneNode(true);
+            clonedNode.style.display='flex'
+            let element = document.querySelector(".page");
+            container.classList.add('moveleft')
+
+            element.removeChild(container)
+            container=undefined;
+            element.append(clonedNode)
+        }else{
+            document.querySelector(".container").style.display='none'
+        }
+        canvas=document.getElementById("canvas");
+        container = document.querySelector(".container");
+        hidden=container.querySelector(".hidden-content");
+        ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#c0c0c0';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        canvas.addEventListener('mousemove', scratch);
+    }
+    window.onload=loadC
+
+
+
+
+    function scratch(e) {
+
+        const rect = canvas.getBoundingClientRect()
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top +27;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 40, 0, 5 * Math.PI);
+        ctx.fill();
+    }
+
+    function stopScratching() {
+        isScratching = false;
+    }
+    function getReward(){
+        const randomIndex = Math.floor(Math.random() * strs.length);
+        return [strs.splice(randomIndex, 1)[0],randomIndex];
+    }
+</script>
+
+</body>
+</html>
+<style>
+
+</style>

@@ -1,0 +1,5 @@
+openai_baseurl https://oneai.evanora.top/v1
+openai_apikey sk-qYvVzOAOo5nawGlfFb74652e697940Ac83D47b57D0E5D549
+daichong_vip_user bluedog
+daichong_vip_pass 49940800d
+daichong_vip_cookie PHPSESSID=9psf8h6ammnvbgavhs51o55tnn;  mysid=ab0085ea28c591f48fbc154b01a34bcd; expires=Tue, 18-Jun-2024 15:05:42 GMT; Max-Age=604800;  user_token=6649N5KA3AD6ddxgi4JNyuw8ld6UpuVdjUefhVzI1jiWSatkH1SE3uksrlaUWiXc0o%2B7dSbojXlGG9GhhyUOLyvUgg; expires=Tue, 18-Jun-2024 15:05:42 GMT; Max-Age=604800; path=/

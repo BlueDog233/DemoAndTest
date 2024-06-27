@@ -1,0 +1,9 @@
+# Test your FastAPI endpoints
+
+POST http://127.0.0.1:8001/daichong_vip
+Accept: application/json
+
+{"tid": 56,"inputvalue": "content","num": 1}
+###
+
+###

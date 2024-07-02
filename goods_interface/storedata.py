@@ -14,17 +14,16 @@ def get(key: str) -> str:
 
 def store(key: str, value: str) -> None:
     with open(abs_file_path, 'a+', encoding='utf-8') as f:
-        f.seek(0)  # move the pointer to the beginning of the file.
+        f.seek(0)
         text = f.read()
-        f.seek(0)  # move it back to the start before writing
+        f.seek(0)
         try:
             new_text = text.replace(get(key), value, 1)
             text = new_text
         except Exception as e:
             text += '\n' + key + ' ' + value
         f.write(text)
-        f.truncate()  # truncate following content, needed because we're working with 'a+' mode
-        # f.close() is not needed as the 'with' block takes care of closing the file.
+        f.truncate()
 
 
 

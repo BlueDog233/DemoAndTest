@@ -50,7 +50,6 @@ def download_file(location: str, url: str, filename: str,proxies):
             response = requests.get(url, stream=True,proxies=proxies)
         except Exception as e:
             response = requests.get(url, stream=True,proxies=proxies)
-
     else:
         response = requests.get(url, stream=True)
     try:

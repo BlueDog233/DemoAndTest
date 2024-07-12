@@ -62,6 +62,7 @@ def delay_save():
         time_count=time_count+1
         if time_count==120 :
             changeProxy()
+            time_count=0
 
 save_point=0
 

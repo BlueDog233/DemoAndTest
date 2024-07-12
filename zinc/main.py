@@ -8,22 +8,18 @@ from tqdm import tqdm
 
 notdos = list()
 
-
 def save_progress():
     with open('./work.txt', 'w') as file:
         for item in notdos:
-            file.write(f'{item}\n')
-
+            file.write(f'{item}')
 
 def signal_handler(sig, frame):
     print('Caught signal:', sig, 'Saving notdos and exiting.')
     save_progress()
     sys.exit(0)
 
-
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
-
 
 def download(keyword: str):
     keyword = keyword.replace('\n', '')
@@ -42,7 +38,7 @@ def download(keyword: str):
         return None
 
 
-with ThreadPoolExecutor(max_workers=40) as executor:
+with ThreadPoolExecutor(max_workers=32) as executor:
     workLists = read(file_path='./work.txt', read_as_line=True, delete_after_read=False)
     workLists = list(set(workLists))
     notdos = workLists

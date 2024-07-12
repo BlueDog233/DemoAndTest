@@ -3,6 +3,7 @@ import shutil
 from pathlib import Path
 from typing import Callable
 import requests
+from urllib3 import HTTPSConnectionPool
 
 
 def operation():
@@ -42,9 +43,17 @@ def overwrite(file_path: str, content: str):
         file.write(content)
 
 
-def download_file(location: str, url: str, filename: str):
+def download_file(location: str, url: str, filename: str,proxies):
     # Send a HTTP request to the URL of the file
-    response = requests.get(url, stream=True)
+    if proxies is not None:
+        try:
+            response = requests.get(url, stream=True,proxies=proxies)
+        except Exception as e:
+            response = requests.get(url, stream=True,proxies=proxies)
+
+        print(response.content)
+    else:
+        response = requests.get(url, stream=True)
     try:
         # Open the file in write mode
         with open(os.path.join(location, filename), 'wb') as file:

@@ -51,7 +51,6 @@ def download_file(location: str, url: str, filename: str,proxies):
         except Exception as e:
             response = requests.get(url, stream=True,proxies=proxies)
 
-        print(response.content)
     else:
         response = requests.get(url, stream=True)
     try:

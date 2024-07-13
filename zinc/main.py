@@ -45,9 +45,6 @@ def changeProxy():
         if(i==1):
             break
 
-
-
-
 changeProxy()
 def save_progress():
     with open('./work.txt', 'w') as file:

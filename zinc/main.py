@@ -8,16 +8,47 @@ from utils import read, download_file
 from lxml import html
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
+from DrissionPage import WebPage
+from DrissionPage import ChromiumPage
 
 notdos = list()
 proxy='O24071218402747623548_1:PyMNKosT@static-qiye.hailiangip.com:41549'
 
 def changeProxy():
-    req = requests.post(
-        url='https://www.hailiangip.com/window/getip/add-whites',
-        headers={'Cookie':'hailianipUserSsId=9420lyif3gov; Hm_lvt_9e39edf70678fdfa22949c4a21bae902=1720771793; HMACCOUNT=458E1F30D73633CE; mediav=%7B%22eid%22%3A%22836637%22%2C%22ep%22%3A%22%22%2C%22vid%22%3A%22%5EQ%3AnvT%60KM%5D%3Dh%6089D%25jGS%22%2C%22ctn%22%3A%22%22%2C%22vvid%22%3A%22%5EQ%3AnvT%60KM%5D%3Dh%6089D%25jGS%22%2C%22_mvnf%22%3A1%2C%22_mvctn%22%3A0%2C%22_mvck%22%3A0%2C%22_refnf%22%3A0%7D; _clck=rgv730%7C2%7Cfne%7C0%7C1654; AGL_USER_ID=dcc1c7f3-2f2b-4082-bfc7-dbe309fd2137; userMobile=18180034455; menuShowFlag=1; userCertStatus_18180034455=1; _gid=GA1.2.805978769.1720773712; hailianipUserRefHost=unitradeprod.alipay.com; hailianipUserBaiduIdWord=; _ga=GA1.1.1819772394.1720773711; Qs_lvt_345494=1720771793%2C1720774430%2C1720779337%2C1720780882; isOrder_18180034455=4; _uetsid=1e39f4f0402611efbbc1874b8679fa06; _uetvid=1e39e5a0402611ef8c41bb9741cff89f; _uetmsclkid=_uet419541f7db36183dcf5a27673ff38336; _clsk=184gx4x%7C1720781229680%7C14%7C1%7Cp.clarity.ms%2Fcollect; _ga_DMP7XFZMMQ=GS1.1.1720777115.2.1.1720781292.0.0.0; Qs_pv_345494=4348573549595559400%2C1713882812210094300%2C1883150101786618400%2C4439158842232267300%2C2758183938432298000; Hm_lpvt_9e39edf70678fdfa22949c4a21bae902=1720781294; liuguanphp_session=eyJpdiI6InlGbDVZaFBxcEYzSGZzQUg1QzNsaUE9PSIsInZhbHVlIjoiaU53Y3FKamdaSlhXKzMwREEwWGF0eEdPVVBhbFpJSk5Yekp6WnExSmZabzI3ZHh1Vjk5bUtiOUpzTzhpN2lYREF1VjBWNFd1SWpLSDhod1ZMZG1GTW43cXh6ZHlSR3U2dUw3SFFzM01wOFwvcE94V3NIanJTY0JiekJGaVB4bWR5IiwibWFjIjoiZDI3ZjY0OWVkMjlhYzhlNmU3MjhjYzEzM2ZlZjk4NzI0ZjZhYjkyMDczOGE3YTcwZjBjNTUwNTM0YjM4ZGEyZSJ9'},
-        params={'id': '9359', 'pid' :-1,'cid':-1}
-    )
+    page = ChromiumPage()
+    page.get('https://www.hailiangip.com/')
+    try:
+        page.ele('@@class=new-before-close@@onClick=closeIpStaticCoupons()').click()
+    except Exception as e:
+        pass
+    try:
+        page.ele('@id=top-login-btn').click()
+        page.ele('@name=username-mobile').input('18180034455')
+        page.ele('@name=password').input('bluedog233')
+        page.ele('@class=btn btn-primary login-button').click()
+    except Exception as e:
+        pass
+    page.get('https://www.hailiangip.com/personal/order/detail?orderId=O24071218402747623548')
+    page.listen.start('webOrder/getOrderRedirectLinePage')
+    page.ele('@class=search').click()
+    i=0
+    for packet in page.listen.steps():
+        i=i+1
+        cookie=packet.request.extra_info.headers.get('cookie')
+        req = requests.post(
+            url='https://www.hailiangip.com/update/new/lineConfig',
+            headers={
+                'Cookie': cookie},
+            params={'id': '9359', 'pid': -1, 'cid': -1}
+        )
+        print(req.content)
+        if(i==1):
+            break
+
+
+
+
+changeProxy()
 def save_progress():
     with open('./work.txt', 'w') as file:
         for item in notdos:
@@ -57,7 +88,7 @@ time_count=0
 def delay_save():
     global time_count
     while 1:
-        time.sleep(60)
+        time.sleep(5)
         save_progress()
         time_count=time_count+1
         if time_count==120 :
